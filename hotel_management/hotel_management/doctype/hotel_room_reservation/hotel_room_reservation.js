@@ -48,6 +48,10 @@ frappe.ui.form.on('Hotel Room Reservation', {
 					invoice_item.item_code = d.item;
 					invoice_item.qty = d.qty;
 					invoice_item.rate = d.rate;
+					invoice_item.item_name = d.item;
+					invoice_item.description = d.item;
+					invoice_item.uom = "Nos";
+					invoice_item.income_account = "Sales - BCL";
 				}
 				if (hotel_settings.default_taxes_and_charges){
 					invoice.taxes_and_charges = hotel_settings.default_taxes_and_charges;

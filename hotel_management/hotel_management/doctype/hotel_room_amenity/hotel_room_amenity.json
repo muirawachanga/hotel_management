@@ -86,7 +86,7 @@
  "max_attachments": 0, 
  "modified": "2017-12-09 12:05:07.125687", 
  "modified_by": "Administrator", 
- "module": "Hotels", 
+ "module": "Hotel Management",
  "name": "Hotel Room Amenity", 
  "name_case": "", 
  "owner": "Administrator", 

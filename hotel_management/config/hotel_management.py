@@ -28,7 +28,7 @@ def get_data():
 
                 {
                     "type": "doctype",
-                    "name": "Hotel Pricing",
+                    "name": "Hotel Room Pricing",
                     "description": _("Create Price.")
                 },
                 {

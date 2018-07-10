@@ -9,7 +9,7 @@
  "is_standard": "Yes", 
  "modified": "2017-12-09 14:31:26.306705", 
  "modified_by": "Administrator", 
- "module": "Hotels", 
+ "module": "Hotel Management",
  "name": "Hotel Room Occupancy", 
  "owner": "Administrator", 
  "ref_doctype": "Hotel Room Reservation", 
