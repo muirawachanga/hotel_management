@@ -187,7 +187,7 @@ def item_query(doctype, txt, searchfield, start, page_len, filters, as_dict=Fals
 	conditions = []
 
 	description_cond = ''
-	if frappe.db.count('Item', cache=True) < 50000:
+	if frappe.db.count('Item') < 50000:
 		# scan description only if items are less than 50000
 		description_cond = 'or tabItem.description LIKE %(txt)s'
 
