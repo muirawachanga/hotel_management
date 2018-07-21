@@ -10,12 +10,14 @@ def execute(filters=None):
 
 
 def get_conditions(filters):
+	if filters.get("to_date") < filters.get("from_date"):
+		msgprint(_("Please sent date accordingly"))
 	conditions = ""
 	# if filters.get("no_of_people"): conditions += " and no_of_people=%(no_of_people)s"
 	# if filters.get("reservation_instructions"): conditions += " and reservation_instructions = %(reservation_instructions)s"
 
-	if filters.get("from_date"): conditions += " and creation >= %(from_date)s"
-	if filters.get("to_date"): conditions += " and creation <= %(to_date)s"
+	if filters.get("from_date"): conditions += " and creation>=%(from_date)s"
+	if filters.get("to_date"): conditions += " and creation<=%(to_date)s"
 
 	if filters.get("customer"): conditions += " and customer = %(customer)s"
 
@@ -33,13 +35,13 @@ def _execute(filters):
 	extra_it_rate_map = get_extra_it_rate_map(reservation_list)
 	for res in reservation_list:
 		# msgprint(_(res.name))
-		# item = list(set(extra_it_rate_map.get(res.name, {}).get("item", [])))
+		item = list(set(extra_it_rate_map.get(res.name, {}).get("item", [])))
 		# rate = list(set(extra_it_rate_map.get(res.name, {}).get("rate", [])))
 		row = [res.get("name"), res.get("customer"), res.get("guest_name"),
 			   res.get("from_date"), res.get("to_date"),res.get("hotel_room"),
 			   res.get("reservation_note")]
 
-		# row +=[ ", ".join(item)]
+		row +=[ ", ".join(item)]
 		data.append(row)
 	return columns, data
 
@@ -55,15 +57,15 @@ def get_columns():
 	"""return columns based on filters"""
 	columns =[
 		_("Name") + ":Link/Hotel Room Reservation:80", _("Customer") + ":Link/Customer:120",
-		_("Guest Name") + "::120", _("From Date") + "::120",
-		_("To Date") + "::120", _("Hotel Room") + ":Link/Hotel Room :120", _("Reservation Note ") + ":Long Text:180"
+		_("Guest Name") + "::120", _("From Date") + "::120", _("To Date") + "::120",
+		_("Hotel Room") + ":Link/Hotel Room:120", _("Package") + "::180",  _("Reservation Note ") + ":Long Text:180"
 	]
 	return columns
 
 def get_extra_it_rate_map(reservation_list):
 	# msgprint(_(reservation_list))
 	si_items = frappe.db.sql("""select parent, item
-		from `tabRestaurant Order Entry Item` where parent in (%s)
+		from `tabHotel Room Reservation Item` where parent in (%s)
 		and (ifnull(item, '') != '')""" %
 							 ', '.join(['%s']*len(reservation_list)), tuple([res.name for res in reservation_list]), as_dict=1)
 

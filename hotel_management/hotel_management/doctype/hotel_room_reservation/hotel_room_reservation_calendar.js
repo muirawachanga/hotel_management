@@ -3,7 +3,6 @@ frappe.views.calendar["Hotel Room Reservation"] = {
 		"start": "from_date",
 		"end": "to_date",
 		"id": "name",
-		"title": "guest_name",
-		"status": "status"
-	}
-}
+		"title": "guest_name"
+     }
+};

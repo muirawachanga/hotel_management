@@ -2,8 +2,8 @@ app_name = "hotel_management"
 app_title = "Hotel Management"
 app_publisher = "Frappe"
 app_description = "App for managing Hotel"
-app_icon = "icon-book"
-app_color = "#589494"
+app_icon = "fa fa-bed"
+app_color = "#728C00"
 app_email = "wachangasteve@gmail.com"
 app_url = "http://terester.com"
 app_version = "0.0.1"
@@ -57,7 +57,13 @@ app_version = "0.0.1"
 # 		"on_cancel": "method",
 # 		"on_trash": "method"
 #	}
+# # }
+# doc_events = {
+#     "Hotel Room Reservation":{
+#         "on_cancel": "hotel_management.hotel_management.doctype.hotel_room_reservation.hotel_room_reservation.release_room"
+#     }
 # }
+
 
 # Scheduled Tasks
 # ---------------

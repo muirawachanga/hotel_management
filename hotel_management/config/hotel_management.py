@@ -34,7 +34,7 @@ def get_data():
                 {
                     "type": "doctype",
                     "name": "Hotel Room Pricing Package",
-                    "description": _("Create package.")
+                    "description": _("Create package Price.")
                 },
                 {
                     "type": "doctype",

@@ -2,12 +2,42 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on('Hotel Room Reservation', {
+    setup: function(frm) {
+    		let get_item_query = () => {
+    			return {
+    				query: 'hotel_management.hotel_management.doctype.hotel_room_reservation.hotel_room_reservation.item_query_room',
+    				filters: {
+    					'hotel_room': frm.doc.hotel_room
+    				}
+    			};
+    		};
+    //	    item is a field in table items
+    		frm.set_query('item', 'items', get_item_query);
+//    		frm.set_query('add_item', get_item_query);
+    	},
 	refresh: function(frm) {
 		if(frm.doc.docstatus == 1){
 			frm.add_custom_button(__("Make Invoice"), ()=> {
 				frm.trigger("make_invoice");
 			});
+            frm.add_custom_button(__("Release Room"), ()=> {
+                frm.trigger("release_room");
+            });
 		}
+		else{
+		 frm.add_custom_button(__("Check Rooms Available"), ()=> {
+              frm.trigger("nav_room");
+              });
+		}
+        frm.set_query('hotel_room', function () {
+            return {
+                filters: [
+                    ['Hotel Room', 'status', '=', 'Available']
+                ]
+            }
+            frm.refresh();
+        });
+
 	},
 	from_date: function(frm) {
 		frm.trigger("recalculate_rates");
@@ -59,8 +89,21 @@ frappe.ui.form.on('Hotel Room Reservation', {
 				frappe.set_route("Form", invoice.doctype, invoice.name);
 			});
 		});
+	},
+	nav_room: function(){
+	    frappe.route_options = {
+	        "status" : "Available"
+	    };
+	    frappe.set_route("List", "Hotel Room");
+	},
+	release_room: function(frm) {
+	     frappe.call({
+	            "method" : "hotel_management.hotel_management.doctype.hotel_room_reservation.hotel_room_reservation.release_room",
+	            "args" : {"hotel_room" : frm.doc.hotel_room}
+	     });
 	}
 });
+
 
 frappe.ui.form.on('Hotel Room Reservation Item', {
 	item: function(frm, doctype, name) {
