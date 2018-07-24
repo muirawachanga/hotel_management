@@ -58,7 +58,7 @@ def get_columns():
 	columns =[
 		_("Name") + ":Link/Hotel Room Reservation:80", _("Customer") + ":Link/Customer:120",
 		_("Guest Name") + "::120", _("From Date") + "::120", _("To Date") + "::120",
-		_("Hotel Room") + ":Link/Hotel Room:120", _("Package") + "::180",  _("Reservation Note ") + ":Long Text:180"
+		_("Hotel Room") + ":Link/Hotel Room:120",  _("Reservation Note ") + ":Long Text:180", _("Package") + "::180"
 	]
 	return columns
 
