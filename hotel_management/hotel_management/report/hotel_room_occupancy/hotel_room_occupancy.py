@@ -16,8 +16,8 @@ def get_conditions(filters):
 	# if filters.get("no_of_people"): conditions += " and no_of_people=%(no_of_people)s"
 	# if filters.get("reservation_instructions"): conditions += " and reservation_instructions = %(reservation_instructions)s"
 
-	if filters.get("from_date"): conditions += " and creation>=%(from_date)s"
-	if filters.get("to_date"): conditions += " and creation<=%(to_date)s"
+	if filters.get("from_date"): conditions += " and from_date>= %(from_date)s  "
+	if filters.get("to_date"): conditions += " and to_date<=%(to_date)s"
 
 	if filters.get("customer"): conditions += " and customer = %(customer)s"
 
